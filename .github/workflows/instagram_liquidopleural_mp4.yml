@@ -1,0 +1,35 @@
+name: Instagram - liquidopleural.mp4
+on:
+  schedule:
+    - cron: '0 15 1 4 *'
+  workflow_dispatch:
+
+jobs:
+  postar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - run: pip install requests
+      - name: Postar no Instagram
+        env:
+          IG_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
+          IG_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
+          VIDEO_URL: "https://files.catbox.moe/kd20vh.mp4"
+          CAPTION: |
+            Ele quase morreu porque o médico não teve coragem de fazer isso
+            
+            Eu parei esse vídeo 3 vezes antes de conseguir comentar. ⤵️
+            
+            Um colega filmou essa toracocentese ao vivo. 120ml de líquido pleural sendo drenado em tempo real. O pulmão desse paciente havia parado de funcionar.
+            
+            O que esse médico fez foi simples: gelco 14, torneirinha, técnica.
+            
+            Mas eu já vi a mesma situação com um desfecho completamente diferente — porque o colega não teve coragem. Intubou. Foi erro de conduta.
+            
+            Salva esse vídeo. Um dia você vai precisar lembrar disso.
+            
+            #cirurgia #medicina #toracocentese #emergencia #shorts
+        run: python postar.py
