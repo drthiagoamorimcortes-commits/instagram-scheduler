@@ -1,0 +1,24 @@
+name: Teste Instagram 5min
+on:
+  schedule:
+    - cron: "34 19 1 4 *"
+  workflow_dispatch:
+
+jobs:
+  postar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - run: pip install requests
+      - name: Postar no Instagram
+        env:
+          IG_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
+          IG_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
+          VIDEO_URL: "https://files.catbox.moe/kd20vh.mp4"
+          CAPTION: |
+            TESTE AUTOMATICO - pode ignorar esse post
+            #teste
+        run: python postar.py
