@@ -1,0 +1,31 @@
+name: Instagram - dramimveiadoendo.mp4
+on:
+  workflow_dispatch:
+
+jobs:
+  postar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - run: pip install requests
+      - name: Postar no Instagram
+        env:
+          IG_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
+          IG_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
+          VIDEO_URL: "https://res.cloudinary.com/dnauytfhw/video/upload/v1775167935/dramimveiadoendo.mp4"
+          CAPTION: |
+            Esse medico estava torturando a paciente sem saber
+            
+            Entrei na sala e a paciente tava com cara de dor. O R1 aplicando Dramin direto na veia, sem diluir.
+            
+            O Dramin arde muito na veia. Nao e sedacao, nao e exagero da paciente - e dor real.
+            
+            A solucao e simples: joga 250-500ml de soro e deixa correr. A ardencia some.
+            
+            Isso ninguem te ensina na faculdade. Aprende aqui.
+            
+            #medicina #dramin #plantao #medicinaurgencia #shorts
+        run: python postar.py
