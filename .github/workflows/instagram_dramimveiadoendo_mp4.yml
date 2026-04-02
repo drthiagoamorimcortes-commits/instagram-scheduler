@@ -15,6 +15,7 @@ jobs:
         env:
           IG_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
           IG_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VIDEO_URL: "https://github.com/drthiagoamorimcortes-commits/instagram-scheduler/releases/download/videos/dramimveiadoendo.mp4"
           CAPTION: |
             Esse medico estava torturando a paciente sem saber
