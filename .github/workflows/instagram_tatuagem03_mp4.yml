@@ -1,0 +1,26 @@
+name: Instagram - tatuagem03.mp4
+on:
+  workflow_dispatch:
+
+jobs:
+  postar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - run: pip install requests
+      - name: Postar no Instagram
+        env:
+          IG_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
+          IG_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VIDEO_URL: "https://github.com/drthiagoamorimcortes-commits/instagram-scheduler/releases/download/videos/tatuagem03.mp4"
+          CAPTION: |
+            Parto normal não precisa de anestesia.
+            Mas existe analgesia de parto — e alivia 80% da dor. Ninguém chama quem usa de fraca ou frescura.
+            Então por que é diferente pra tatuagem?
+            Tecnologia existe pra aliviar sofrimento. Negar isso a alguém não é coragem — é crueldade. 🧠
+            #medicina #tatuagem #anestesia #dor #saude #curiosidadesmedicas #medico
+        run: python postar.py
