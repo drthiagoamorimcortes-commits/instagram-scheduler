@@ -1,0 +1,28 @@
+name: Instagram - fantasma03.mp4
+on:
+  workflow_dispatch:
+
+jobs:
+  postar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - run: pip install requests
+      - name: Postar no Instagram
+        env:
+          IG_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
+          IG_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VIDEO_URL: "https://github.com/drthiagoamorimcortes-commits/instagram-scheduler/releases/download/videos/fantasma03.mp4"
+          CAPTION: |
+            Seu médico receitou antidepressivo pra dor — e você achou estranho?
+            
+            Não é engano. Na dor crônica, o opioide sozinho não resolve. Você precisa combinar mecanismos de ação diferentes — e o antidepressivo age exatamente onde o opioide não chega.
+            
+            Depois de 3 meses de dor, o circuito muda. E o tratamento precisa mudar junto. 🧠💉
+            
+            #medicina #dorconica #dor #neurologia #saude #curiosidadesmedicas #medico
+        run: python postar.py
